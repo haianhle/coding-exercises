@@ -1,12 +1,10 @@
 /* Singly linked list
    Although we can easily access the next node we cannot access the previous node
 
-   Functions:
+   Functions available:
      - add_node
-     - traversal
-     - concatenate 2 linked lists 
-     - insert a node
-     - delete a node
+     - delete_node
+     - display_list
 */
 
 #include <iostream>
@@ -48,6 +46,33 @@ class linked_list
                 tail = tail->next;
             }
         }
+
+        node* get_head()
+        {
+            return head;
+        }
+
+        void delete_node(node *before)
+        {
+            node *tmp;
+            tmp = before->next;
+            before->next = tmp->next;
+            delete tmp;
+        }
+
+        void display(node *head)
+        {
+            if (head == NULL)
+            {
+                cout << "NULL" << endl;
+            }
+            else
+            {
+                cout << head->data << endl;
+                display(head->next);
+            }
+        }
+
 };
 
 int main()
@@ -55,5 +80,11 @@ int main()
     linked_list a;
     a.add_node(1);
     a.add_node(2);
+    a.add_node(5);
+    a.add_node(8);
+    a.add_node(7);
+    a.display(a.get_head());
+    a.delete_node(a.get_head()->next->next);
+    a.display(a.get_head());
     return 0;
 }
